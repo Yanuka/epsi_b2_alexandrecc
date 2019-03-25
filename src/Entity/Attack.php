@@ -21,26 +21,27 @@ class Attack extends Base
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Name;
+    private $name;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $Power;
+    private $power;
 
     /**
      * @ORM\Column(type="smallint")
      */
-    private $Type;
+    private $type;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Pokemon", mappedBy="Attack")
      */
-    private $Pokemon;
+    private $pokemon;
 
     public function __construct()
     {
-        $this->Pokemon = new ArrayCollection();
+        parent::__construct();
+        $this->pokemon = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -50,36 +51,36 @@ class Attack extends Base
 
     public function getName(): ?string
     {
-        return $this->Name;
+        return $this->name;
     }
 
-    public function setName(string $Name): self
+    public function setName(string $name): self
     {
-        $this->Name = $Name;
+        $this->name = $name;
 
         return $this;
     }
 
     public function getPower(): ?int
     {
-        return $this->Power;
+        return $this->power;
     }
 
-    public function setPower(int $Power): self
+    public function setPower(int $power): self
     {
-        $this->Power = $Power;
+        $this->power = $power;
 
         return $this;
     }
 
     public function getType(): ?int
     {
-        return $this->Type;
+        return $this->type;
     }
 
-    public function setType(int $Type): self
+    public function setType(int $type): self
     {
-        $this->Type = $Type;
+        $this->type = $type;
 
         return $this;
     }
@@ -89,13 +90,13 @@ class Attack extends Base
      */
     public function getPokemon(): Collection
     {
-        return $this->Pokemon;
+        return $this->pokemon;
     }
 
     public function addPokemon(Pokemon $pokemon): self
     {
-        if (!$this->Pokemon->contains($pokemon)) {
-            $this->Pokemon[] = $pokemon;
+        if (!$this->pokemon->contains($pokemon)) {
+            $this->pokemon[] = $pokemon;
             $pokemon->addAttack($this);
         }
 
@@ -104,8 +105,8 @@ class Attack extends Base
 
     public function removePokemon(Pokemon $pokemon): self
     {
-        if ($this->Pokemon->contains($pokemon)) {
-            $this->Pokemon->removeElement($pokemon);
+        if ($this->pokemon->contains($pokemon)) {
+            $this->pokemon->removeElement($pokemon);
             $pokemon->removeAttack($this);
         }
 

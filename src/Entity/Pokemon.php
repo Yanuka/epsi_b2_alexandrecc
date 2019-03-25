@@ -21,12 +21,12 @@ class Pokemon extends Base
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Name;
+    private $name;
 
     /**
      * @ORM\Column(type="smallint")
      */
-    private $Type;
+    private $type;
 
     /**
      * @ORM\Column(type="integer")
@@ -36,12 +36,12 @@ class Pokemon extends Base
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Attack", inversedBy="Pokemon")
      */
-    private $Attack;
+    private $attack;
 
     public function __construct()
     {
         parent:: __construct();
-        $this->Attack = new ArrayCollection();
+        $this->attack = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -51,24 +51,24 @@ class Pokemon extends Base
 
     public function getName(): ?string
     {
-        return $this->Name;
+        return $this->name;
     }
 
-    public function setName(string $Name): self
+    public function setName(string $name): self
     {
-        $this->Name = $Name;
+        $this->name = $name;
 
         return $this;
     }
 
     public function getType(): ?int
     {
-        return $this->Type;
+        return $this->type;
     }
 
-    public function setType(int $Type): self
+    public function setType(int $type): self
     {
-        $this->Type = $Type;
+        $this->type = $type;
 
         return $this;
     }
@@ -90,13 +90,13 @@ class Pokemon extends Base
      */
     public function getAttack(): Collection
     {
-        return $this->Attack;
+        return $this->attack;
     }
 
     public function addAttack(Attack $attack): self
     {
-        if (!$this->Attack->contains($attack)) {
-            $this->Attack[] = $attack;
+        if (!$this->attack->contains($attack)) {
+            $this->attack[] = $attack;
         }
 
         return $this;
@@ -104,8 +104,8 @@ class Pokemon extends Base
 
     public function removeAttack(Attack $attack): self
     {
-        if ($this->Attack->contains($attack)) {
-            $this->Attack->removeElement($attack);
+        if ($this->attack->contains($attack)) {
+            $this->attack->removeElement($attack);
         }
 
         return $this;
