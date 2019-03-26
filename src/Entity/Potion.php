@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PotionRepository")
  */
-class Potion extends Base
+class Potion
 {
     /**
      * @ORM\Id()
@@ -22,7 +22,7 @@ class Potion extends Base
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      */
     private $healingRate;
 
@@ -43,12 +43,12 @@ class Potion extends Base
         return $this;
     }
 
-    public function getHealingRate(): ?string
+    public function getHealingRate(): ?int
     {
         return $this->healingRate;
     }
 
-    public function setHealingRate(string $healingRate): self
+    public function setHealingRate(int $healingRate): self
     {
         $this->healingRate = $healingRate;
 
