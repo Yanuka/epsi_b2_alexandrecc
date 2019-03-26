@@ -32,7 +32,8 @@ class AttackFixtures extends Fixture
         return [
             ['Flammèche', 50, Type::TYPE_FIRE],
             ['Pistolet à O', 70, Type::TYPE_WATER],
-            ['Vol-Vie', 40, Type::TYPE_PLANT]
+            ['Vol-Vie', 40, Type::TYPE_PLANT],
+            ['Charge', 20, Type::TYPE_NORMAL]
         ];
     }
 }

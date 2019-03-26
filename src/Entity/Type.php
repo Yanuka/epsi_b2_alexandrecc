@@ -8,6 +8,7 @@ class Type
     const TYPE_FIRE = 1;
     const TYPE_WATER = 2;
     const TYPE_PLANT = 3;
+    const TYPE_NORMAL = 4;
 
     public function strongAgainst($typeATK, $typeDEF)
     {
