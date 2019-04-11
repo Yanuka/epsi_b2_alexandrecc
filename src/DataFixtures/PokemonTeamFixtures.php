@@ -13,12 +13,12 @@ class PokemonTeamFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        foreach ($this->getPokemonTeams() as [$trainer, $pokemon]) {
-            dump($pokemon); exit;
+        foreach ($this->getPokemonTeams() as [$trainer, $pokemon, $surName]) {
             $pokemonTeam = new PokemonTeam;
             $pokemonTeam
                 ->setTrainer($trainer)
                 ->setPokemon($pokemon)
+                ->setSurName($surName)
                 ->setHP($pokemon->getHP())
             ;
 
@@ -32,7 +32,9 @@ class PokemonTeamFixtures extends Fixture implements DependentFixtureInterface
     {
         // [trainer, pokemon]
         return [
-            [$this->getReference('Sacha'), $this->getReference('Carapuce')]
+            [$this->getReference('Sacha'), $this->getReference('Carapuce'), ''],
+            [$this->getReference('Sacha'), $this->getReference('Salamèche'), 'Salami'],
+            [$this->getReference('Sacha'), $this->getReference('Bulbizarre'), '']
 
             
         ];
