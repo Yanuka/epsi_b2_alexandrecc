@@ -18,15 +18,28 @@ class PokemonTeam
      */
     private $id;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Trainer", mappedBy="pokemonTeam")
-     */
-    private $Trainer;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Pokemon", mappedBy="pokemonTeam")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $Pokemon;
+    private $surName;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $HP;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Trainer")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $trainer;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Pokemon")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $pokemon;
 
     public function __construct()
     {
@@ -39,64 +52,51 @@ class PokemonTeam
         return $this->id;
     }
 
-    /**
-     * @return Collection|Trainer[]
-     */
-    public function getTrainer(): Collection
+
+    public function getSurName(): ?string
     {
-        return $this->Trainer;
+        return $this->surName;
     }
 
-    public function addTrainer(Trainer $trainer): self
+    public function setSurName(?string $surName): self
     {
-        if (!$this->Trainer->contains($trainer)) {
-            $this->Trainer[] = $trainer;
-            $trainer->setPokemonTeam($this);
-        }
+        $this->surName = $surName;
 
         return $this;
     }
 
-    public function removeTrainer(Trainer $trainer): self
+    public function getHP(): ?int
     {
-        if ($this->Trainer->contains($trainer)) {
-            $this->Trainer->removeElement($trainer);
-            // set the owning side to null (unless already changed)
-            if ($trainer->getPokemonTeam() === $this) {
-                $trainer->setPokemonTeam(null);
-            }
-        }
+        return $this->HP;
+    }
+
+    public function setHP(int $HP): self
+    {
+        $this->HP = $HP;
 
         return $this;
     }
 
-    /**
-     * @return Collection|Pokemon[]
-     */
-    public function getPokemon(): Collection
+    public function getTrainer(): ?Trainer
     {
-        return $this->Pokemon;
+        return $this->trainer;
     }
 
-    public function addPokemon(Pokemon $pokemon): self
+    public function setTrainer(?Trainer $trainer): self
     {
-        if (!$this->Pokemon->contains($pokemon)) {
-            $this->Pokemon[] = $pokemon;
-            $pokemon->setPokemonTeam($this);
-        }
+        $this->trainer = $trainer;
 
         return $this;
     }
 
-    public function removePokemon(Pokemon $pokemon): self
+    public function getPokemon(): ?Pokemon
     {
-        if ($this->Pokemon->contains($pokemon)) {
-            $this->Pokemon->removeElement($pokemon);
-            // set the owning side to null (unless already changed)
-            if ($pokemon->getPokemonTeam() === $this) {
-                $pokemon->setPokemonTeam(null);
-            }
-        }
+        return $this->pokemon;
+    }
+
+    public function setPokemon(?Pokemon $pokemon): self
+    {
+        $this->pokemon = $pokemon;
 
         return $this;
     }

@@ -34,20 +34,15 @@ class Pokemon extends Base
     private $HP;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Attack", inversedBy="Pokemon")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Attack")
      */
     private $attack;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\PokemonTeam", inversedBy="Pokemon")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $pokemonTeam;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $surName;
+    public function __construct()
+    {
+        parent::__construct();
+        $this->attack = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -115,30 +110,4 @@ class Pokemon extends Base
 
         return $this;
     }
-
-    public function getPokemonTeam(): ?PokemonTeam
-    {
-        return $this->pokemonTeam;
-    }
-
-    public function setPokemonTeam(?PokemonTeam $pokemonTeam): self
-    {
-        $this->pokemonTeam = $pokemonTeam;
-
-        return $this;
-    }
-
-    public function getSurName(): ?string
-    {
-        return $this->surName;
-    }
-
-    public function setSurName(string $surName): self
-    {
-        $this->surName = $surName;
-
-        return $this;
-    }
-
-    
 }

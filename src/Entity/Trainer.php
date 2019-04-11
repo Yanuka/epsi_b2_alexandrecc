@@ -35,12 +35,6 @@ class Trainer implements UserInterface
      */
     private $password;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\PokemonTeam", inversedBy="Trainer")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $pokemonTeam;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -112,18 +106,6 @@ class Trainer implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
-    }
-
-    public function getPokemonTeam(): ?PokemonTeam
-    {
-        return $this->pokemonTeam;
-    }
-
-    public function setPokemonTeam(?PokemonTeam $pokemonTeam): self
-    {
-        $this->pokemonTeam = $pokemonTeam;
-
-        return $this;
     }
 
 }

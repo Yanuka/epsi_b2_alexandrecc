@@ -11,19 +11,18 @@ class PokemonFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        foreach ($this->getPokemons() as [$name, $surName, $type, $HP, $attack, $attack2]) {
+        foreach ($this->getPokemons() as [$name, $type, $HP, $attack, $attack2]) {
             $pokemon = new Pokemon;
             $pokemon
                 ->setName($name)
-                ->setSurName($surName)
                 ->setType($type)
                 ->setHP($HP)
                 ->addAttack($attack)
                 ->addAttack($attack2)
-
             ;
 
             $manager->persist($pokemon);
+            $reference = $this->addReference($name, $pokemon);
         }
 
         $manager->flush();
@@ -31,11 +30,11 @@ class PokemonFixtures extends Fixture
 
     public function getPokemons()
     {
-        // [name, surname, type, HP, attack, attack2]
+        // [name, type, HP, attack, attack2]
         return [
-            ['Salamèche', 'Salami', Type::TYPE_FIRE, 100, $this->getReference('Flammèche'), $this->getReference('Charge')],
-            ['Carapuce', 'Caramel', Type::TYPE_WATER, 120, $this->getReference('Pistolet à O'), $this->getReference('Charge')],
-            ['Bulbizarre', 'BouleBizarre', Type::TYPE_PLANT, 90, $this->getReference('Vol-Vie'), $this->getReference('Charge')]
+            ['Salamèche', Type::TYPE_FIRE, 100, $this->getReference('Flammèche'), $this->getReference('Charge')],
+            ['Carapuce', Type::TYPE_WATER, 120, $this->getReference('Pistolet à O'), $this->getReference('Charge')],
+            ['Bulbizarre', Type::TYPE_PLANT, 90, $this->getReference('Vol-Vie'), $this->getReference('Charge')]
 
         ];
     }

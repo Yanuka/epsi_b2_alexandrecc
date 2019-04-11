@@ -7,25 +7,22 @@ use App\Entity\Pokemon;
 use App\Entity\PokemonTeam;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class PokemonTeamFixtures extends Fixture
+class PokemonTeamFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        foreach ($this->getPokemonTeams() as [$username, $pokemon1, $pokemonSurname1, $pokemon2, $pokemonSurname2, $pokemon3, $pokemonSurname3]) {
+        foreach ($this->getPokemonTeams() as [$trainer, $pokemon]) {
+            dump($pokemon); exit;
             $pokemonTeam = new PokemonTeam;
             $pokemonTeam
-                ->addUsername($username)
-                ->addPokemon($pokemon1)
-                ->addPokemonSurname($pokemonSurname1)
-                ->addPokemon($pokemon2)
-                ->addPokemonSurname($pokemonSurname2)
-                ->addPokemon($pokemon3)
-                ->addPokemonSurname($pokemonSurname3)
+                ->setTrainer($trainer)
+                ->setPokemon($pokemon)
+                ->setHP($pokemon->getHP())
             ;
 
             $manager->persist($pokemonTeam);
-            $reference = $this->addReference($username, $pokemonTeam);
         }
 
         $manager->flush();
@@ -33,17 +30,18 @@ class PokemonTeamFixtures extends Fixture
 
     public function getPokemonTeams()
     {
-        // [username, pokemon1, pokemonSurname1, pokemon2, pokemonSurname2, pokemon3, pokemonSurname3]
+        // [trainer, pokemon]
         return [
-            [$this->getReference('Sacha'), $this->getReference('Carapuce'), $this->getReference('Caramel'), $this->getReference('Salamèche'), $this->getReference('Salami'), $this->getReference('Bulbizarre'), $this->getReference('Boulebizarre')]
+            [$this->getReference('Sacha'), $this->getReference('Carapuce')]
 
             
         ];
     }
 
-    public function getOrder()
+    public function getDependencies()
     {
-        return 5; // the order in which fixtures will be loaded
+        return [TrainerFixtures::class];
+
     }
 }
 
