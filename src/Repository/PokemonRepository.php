@@ -19,13 +19,13 @@ class PokemonRepository extends ServiceEntityRepository
         parent::__construct($registry, Pokemon::class);
     }
 
-    public function findByType($type)
+    public function findStarter()
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.Type = :type')
-            ->setParameter('type', $type)
-            ->orderBy('p.name', 'ASC')
-            ->setMaxResults(5)
+            ->where('p.isActive = 1')
+            ->andWhere('p.deletedAt = NULL')
+            ->orderBy('p.id', 'ASC')
+            ->setMaxResults(3)
             ->getQuery()
             ->getResult()
         ;

@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Pokemon;
+use App\Entity\Potions;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 

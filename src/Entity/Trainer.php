@@ -35,6 +35,11 @@ class Trainer implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $starterAt;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -106,6 +111,18 @@ class Trainer implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getStarterAt(): ?\DateTimeInterface
+    {
+        return $this->starterAt;
+    }
+
+    public function setStarterAt(?\DateTimeInterface $starterAt): self
+    {
+        $this->starterAt = $starterAt;
+
+        return $this;
     }
 
 }

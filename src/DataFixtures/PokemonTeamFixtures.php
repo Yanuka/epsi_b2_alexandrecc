@@ -32,9 +32,9 @@ class PokemonTeamFixtures extends Fixture implements DependentFixtureInterface
     {
         // [trainer, pokemon]
         return [
-            [$this->getReference('Sacha'), $this->getReference('Carapuce'), ''],
+            [$this->getReference('Sacha'), $this->getReference('Carapuce'), ' '],
             [$this->getReference('Sacha'), $this->getReference('Salamèche'), 'Salami'],
-            [$this->getReference('Sacha'), $this->getReference('Bulbizarre'), '']
+            [$this->getReference('Sacha'), $this->getReference('Bulbizarre'), ' ']
 
             
         ];
