@@ -88,17 +88,17 @@ class FormLoginAuthenticator extends AbstractFormLoginAuthenticator
         if ($token->getUser()->getRoles() == ['ROLE_USER'])
         {
             if ($token->getUser()->getStarterAt() == null) {
-                throw new RedirectResponse($this->urlGenerator->generate('starter'));
+                return new RedirectResponse($this->urlGenerator->generate('starter'));
             }
 
             else {
-                throw new RedirectResponse($this->urlGenerator->generate('dashboard'));
+                return new RedirectResponse($this->urlGenerator->generate('dashboard'));
             }
         }
 
         if ($token->getUser()->getRoles() == ['ROLE_ADMIN'])
         {
-            throw new RedirectResponse($this->urlGenerator->generate('admin'));
+            return new RedirectResponse($this->urlGenerator->generate('admin'));
         }
 
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
